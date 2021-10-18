@@ -20,7 +20,7 @@ export default function LoginScreen (props: LoginScreenProps) {
         //Simular delay
         await new Promise((resolve, error) => setTimeout(() => resolve (''), 2000))
         if(dados.email.trim() == 'admin@admin.com' && dados.senha == '123456'){
-            nav.navigate('musicos');
+            nav.navigate('app');
         } else {
             console.log('Falha ao realizar login, usuário ou senha incorreta!');
         }

@@ -1,39 +1,23 @@
-import { useNavigation } from '@react-navigation/core';
 import * as React from 'react';
-import { View, ImageBackground, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { AppToolbar } from '../../Components/toolbar';
+import { ItemMusicos } from '../home/components';
+import { Musicos } from '../../models/musicos';
 
-
-export interface homeScreenProps {
+export interface MusicosScreenProps {
 }
 
-export default function homeScreen (props: homeScreenProps) {
-
+export function HomeScreen (props: any) {
     const nav = useNavigation();
-    
+    const route = useRoute();
     return (
-      <ImageBackground source={require('./../../imgs/inicio.png')} style={styles.background}>
-          <View style={styles.cotainer}>
-            <Button title="Entrar" buttonStyle={{borderRadius: 30, backgroundColor: '#D96130', padding: 10}} onPress={() => nav.navigate('login')}/>
-          </View>
+      <View>
+          <AppToolbar titulo="Artistas da noite" menu/>
+          <ItemMusicos musicos={new Musicos('Flávio Lima', '17/10/2021')} onEditar={(musicos: Musicos)=> console.log(musicos)} onExcluir={(id: string) => console.log(id)}/>
+          <ItemMusicos musicos={new Musicos('Flávio Lima', '17/10/2021')} onEditar={(musicos: Musicos)=> console.log(musicos)} onExcluir={(id: string) => console.log(id)}/>
+        
 
-      </ImageBackground>
+      </View>
     );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    width: '100%', 
-    height: '100%',
-  },
-  cotainer:{
-    flex: 1,
-    padding: 20,
-    paddingTop: 200,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch'
-  },
-
-});
-

@@ -5,9 +5,11 @@ import { ActivityIndicator } from 'react-native';
 import { ImageBackground } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
-import { InputRound } from './components';
+import { InputRound } from '../login/components';
+
 
 export interface CadastroProps {
+    navigation: any;
 }
 
 export function Cadastro (props: CadastroProps) {
@@ -49,6 +51,8 @@ export function Cadastro (props: CadastroProps) {
 
                 {isSubmitting && <ActivityIndicator size='large' color='orange'/>}
                 {!isSubmitting && <Button title="Cadastrar" onPress={() => handleSubmit()} buttonStyle={{borderRadius: 30, backgroundColor: '#D96130'}}/>}
+                <br />
+                <Button title="Voltar" buttonStyle={{borderRadius: 30, backgroundColor: '#D96130'}} onPress={() => props.navigation.navigate('login')}/>
                 
             </View>)}
         </Formik>
