@@ -4,7 +4,8 @@ import { View, Text, ImageBackground, StyleSheet, ActivityIndicator, TouchableOp
 import { Button } from 'react-native-elements';
 import { InputRound } from './components';
 import { Formik } from 'formik';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useState } from 'react';
 
 
 export interface LoginScreenProps {
@@ -14,15 +15,16 @@ export interface LoginScreenProps {
 export default function LoginScreen (props: LoginScreenProps) {
 
     const nav = useNavigation();
+    const[erro, setErro] = useState('');
 
     const login = async(dados)=>{
 
         //Simular delay
-        await new Promise((resolve, error) => setTimeout(() => resolve (''), 2000))
+        await new Promise((resolve) => setTimeout(() => resolve (''), 2000))
         if(dados.email.trim() == 'admin@admin.com' && dados.senha == '123456'){
             nav.navigate('app');
         } else {
-            console.log('Falha ao realizar login, usuário ou senha incorreta!');
+            setErro('Falha ao realizar login, usuário ou senha incorreta!');
         }
     }
 

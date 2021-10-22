@@ -5,6 +5,8 @@ import LoginScreen from "../screens/login/login.funcao";
 import { Cadastro } from "../screens/login/cadastro.funcao";
 import { AppNavegacao } from "./drawer-menu";
 import inicioScreen from "../screens/login/Inicial.funcao";
+import { Repertorios } from "../screens/login/repertorio.funcao";
+import { MusicaSelecionar } from "../screens/login/musica.funcao";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +18,8 @@ export function MainNavigation(){
                 <Stack.Screen name="login" component={LoginScreen}/>
                 <Stack.Screen name="cadastro" component={Cadastro}/>
                 <Stack.Screen name="app" component={AppNavegacao}/>
+                <Stack.Screen name="repertorio" component={Repertorios}/>
+                <Stack.Screen name="musica" component={MusicaSelecionar}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
