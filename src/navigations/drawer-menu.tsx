@@ -27,7 +27,6 @@ export function AppNavegacao(){
          >
 
              <Drawer.Screen name="home" component={HomeScreen} options={{drawerLabel: 'Home', drawerActiveBackgroundColor: '#2E2632',drawerIcon: () => <MaterialIcons name="home" style={{color: '#D96130'}}/>}}/>
-             <Drawer.Screen name="configurações" component={ConfigGeralScreen} options={{drawerActiveBackgroundColor: '#D96130', drawerIcon: () => <MaterialIcons name="settings"style={{color: '#D96130'}}/>}} />
          </Drawer.Navigator>
     )
 }
