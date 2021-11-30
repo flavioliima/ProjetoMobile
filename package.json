@@ -28,7 +28,8 @@
     "react-native-screens": "~3.4.0",
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-web": "~0.13.12",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "firebase": "8.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

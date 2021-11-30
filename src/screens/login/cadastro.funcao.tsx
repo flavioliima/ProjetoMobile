@@ -1,11 +1,12 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, ToastAndroid } from 'react-native';
 import { ImageBackground } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { InputRound } from '../login/components';
+import firebase from 'firebase';
 
 
 export interface CadastroProps {
@@ -15,18 +16,22 @@ export interface CadastroProps {
 export function Cadastro (props: CadastroProps) {
 
     const cadastrar = async(dados)=>{
-
+        firebase.auth().createUserWithEmailAndPassword(dados.email, dados.senha)
+            .then((usuario) => alert('Usuario Criado com sucesso!'))
+            .catch((error) => {
+                console.log(error)
+                console.log(error.code)
+                alert('Não foi possivel criar o usuário');
+            });
     }
     return (
       <ImageBackground source={require('./../../imgs/fundoCadastro.png')} style={styles.background}>
 
         <Formik
-            initialValues={{nome: '', email:'', senha:'', confirmarSenha:''}}
-            validationSchema={Yup.object({
-                nome: Yup.string().trim().required('O campo nome é obrigatório'),
-                email: Yup.string().trim().required('O campo email é obrigatório').email('O campo precisa ser um email'),
-                senha: Yup.string().required('O campo senha é obrigatório').min(6, 'A senha precisa ter pelomenos 6 caracteres'),
-                confirmarSenha: Yup.string().required('O campo confirmar senha é obrigatório').min(6, 'A senha precisa ter pelomenos 6 caracteres')
+            initialValues={{email:'', senha:''}}
+            validationSchema={Yup.object().shape({
+                email: Yup.string().required('O campo email é obrigatório').email('O campo precisa ser um email'),
+                senha: Yup.string().required('O campo senha é obrigatório').min(6, 'A senha precisa ter pelomenos 6 caracteres')
             })}
             onSubmit={cadastrar}>
 
@@ -35,10 +40,7 @@ export function Cadastro (props: CadastroProps) {
             <View style={styles.container}>
 
 
-                <Text style={styles.CadastroUsuario}>Cadastro de usuário</Text> 
-              
-                <Text style={styles.TextoFormulario}>Nome completo:</Text>
-                <InputRound onBlur={handleBlur('nome')} onChangeText={handleChange('nome')} placeholder='Digite seu nome' icone='person'/>
+                <Text style={styles.CadastroUsuario}>Cadastro de usuário</Text>
                 
                 <Text style={styles.TextoFormulario}>Email:</Text>
                 <InputRound onBlur={handleBlur('email')} onChangeText={handleChange('email')} placeholder='Digite seu email' icone='email' />
@@ -46,13 +48,10 @@ export function Cadastro (props: CadastroProps) {
                 <Text style={styles.TextoFormulario}>Senha</Text>
                 <InputRound onBlur={handleBlur('senha')} onChangeText={handleChange('senha')} placeholder='Digite sua senha' senha icone='lock'/>
 
-                <Text style={styles.TextoFormulario}>Confirmar senha:</Text>
-                <InputRound onBlur={handleBlur('email')} onChangeText={handleChange('email')} placeholder='Digite seu email' senha icone='lock'/>
-
                 {isSubmitting && <ActivityIndicator size='large' color='orange'/>}
                 {!isSubmitting && <Button title="Cadastrar" onPress={() => handleSubmit()} buttonStyle={{borderRadius: 30, backgroundColor: '#D96130'}}/>}
-                <br />
-                <Button title="Voltar" buttonStyle={{borderRadius: 30, backgroundColor: '#D96130'}} onPress={() => props.navigation.navigate('login')}/>
+
+                <Button title="Voltar" buttonStyle={{borderRadius: 30, backgroundColor: '#D96130', marginTop: '5p%'}} onPress={() => props.navigation.navigate('login')}/>
                 
             </View>)}
         </Formik>

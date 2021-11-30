@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Alert, ToastAndroid, StyleSheet, Share} from 'react-native';
+import { View, Text, Alert, ToastAndroid, StyleSheet, Share, Platform} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AppToolbar } from '../../Components/toolbar';
 import { ItemRepertorio } from '../home/componentsRepertorio';
@@ -28,6 +28,11 @@ export function Repertorios (props: any) {
       new Repertorio('Natiruts', require('../../imgs/artistas/natiruts-artista.jpg'))
     ]);
 
+      
+    /*const recursoNativo = () => {
+      if (Platform.OS == 'web') console.log('Negado')
+      else Share.share({message:'blbalbabl'})
+    }*/
 
     return (
       <View >

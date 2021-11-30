@@ -6,6 +6,7 @@ import { InputRound } from './components';
 import { Formik } from 'formik';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useState } from 'react';
+import firebase from 'firebase';
 
 
 export interface LoginScreenProps {
@@ -19,13 +20,14 @@ export default function LoginScreen (props: LoginScreenProps) {
 
     const login = async(dados)=>{
 
-        //Simular delay
-        await new Promise((resolve) => setTimeout(() => resolve (''), 2000))
-        if(dados.email.trim() == 'admin@admin.com' && dados.senha == '123456'){
-            nav.navigate('app');
-        } else {
-            setErro('Falha ao realizar login, usuário ou senha incorreta!');
-        }
+        firebase.auth().signInWithEmailAndPassword(dados.email, dados.senha)
+            .then((usuario) =>nav.navigate('app'))
+            .catch((error) => {
+                console.log(error)
+                console.log(error.code)
+                alert('Falha ao realizar login, usuário ou senha incorreta!');
+            });
+
     }
 
     return (
